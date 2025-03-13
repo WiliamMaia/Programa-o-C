@@ -1,16 +1,15 @@
 # include <stdio.h>
 
+void movetorre(int casas) {
+    if (casas > 0) {
+        printf("Direita \n");
+        casas - 1;
+    }
+}
+
 int main () {
 
-    int i = 1, numero;
-
-    printf("Qual tabuada você quer saber ?\n");
-    scanf("%d", &numero);
-
-    do {
-        printf("%d x %d = %d\n", numero, i, numero*i);
-        i++;
-    } while (i <= 10);
+ movetorre (5);
 
     return 0;
 
