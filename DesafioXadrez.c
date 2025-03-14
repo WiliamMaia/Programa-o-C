@@ -1,55 +1,49 @@
 #include <stdio.h>
 
-void movetorre(int casas){  // Aqui declaro a função para movimento da Torre
-    for (casas > 0; casas - 1;);
+void movetorre(int movimento){  // Aqui declaro a função para movimento da Torre
+    if (movimento > 0){
+        printf("Direita ! \n");
+        movetorre(movimento - 1);
+    }
 }
-    movebispo(int casas){  // Aqui declaro a função para movimento do Bispo
-        while (casas > 0)
-        casas -- ;
+void movebispo(int movimento){ // Aqui declaro a função para movimento do Bispo
+    while (movimento > 0){
+        printf("Direita e Cima \n");
+        movimento --;
     }
-    moverainha(int casas){  // Aqui declaro a função para movimento da Rainha
-        do (casas - 1);
-        while (casas > 0);
-    }
+}
+void moverainha(int movimento){  // Aqui declaro a função para movimento da Rainha
+    do { printf("Esquerda ! \n");
+        movimento --;
+    } while (movimento > 0);
+}
 
 int main() {
 
-    int torre, bispo, rainha; // Aqui estou declarando as peças
-    int escolhapeca, escolhadirecao; // Aqui declaro as funções para switch
-    int movimento; // Aqui declaro a variável para receber o número de movimentos
+    int escolhapeca,movimento = 1; // Aqui declaro as variáveis
 
     printf("Vamos movimentar as peças de Xadrez ! \n");
-    printf("Primeiro escolha qual peça irá se movimentar: \n 1. Torre \n 2. Bispo \n 3. Rainha \n"); // Aqui solicito a escolha da peça
+    printf("Primeiro escolha qual peça irá se movimentar: \n 1. Torre \n 2. Bispo \n 3. Rainha \n 4. Cavalo \n"); // Aqui solicito a escolha da peça
     scanf("%d", &escolhapeca);  // Aqui recebe a peça
 
     switch (escolhapeca){ // switch para escolha de peça
         case 1: // Escolha da Torre
-        printf("Agora escolha qual direção irá se movimentar \n 1. Direita \n 2. Esquerda \n 3. Cima \n 4. Baixo \n");  // Aqui apresento as direções
-        scanf("%d", escolhadirecao);  // Aqui recebe a direção
-    
-        switch (escolhadirecao){  // switch para escolha da direção
-            case 1: // Escolha Direita
-                printf("Informe quantas casas irá se movimentar: \n");
-                scanf("%d", &movimento);
-                for (movimento > 0; movimento ++;)
-                printf("A Torre se moveu para %d ! \n", escolhadirecao);
-
-            break;  // Fim Direita
-            case 2: // Escolha Esquerda
-            break;  // Fim Esquerda
-            case 3: // Escolha Cima
-            break;  // Fim Cima
-            case 4: // Escolha Baixo
-            break;  // Fim Baixo
-            default:
-            printf("Escolha Inválida !\n");
-            break; // Fim escolha de direção
-        }
-        break;  // Fim Torre
+        movetorre(5);
+         break;  // Fim Torre
         case 2: // Escolha Bispo
+        movebispo(5);
         break;  // Fim Bispo
         case 3: // Escolha Rainha
+        moverainha(8);
         break;  // Fim Rainha
+        case 4: // Escolha Cavalo
+        while (movimento --){
+            for (int avanco_cavalo = 2;avanco_cavalo > 0; avanco_cavalo --){
+                printf("Cima \n");
+            }
+                printf("Direita \n");
+        }
+        break;  // Fim Cavalo
         default:
         printf("Escolha Inválida !\n");
         break; // Fim escolha de peça
