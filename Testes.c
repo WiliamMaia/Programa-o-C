@@ -2,21 +2,15 @@
 
 int main () {
 
-int index;
+    int matriz1 [2][2] = {{0,1}, {2,3}}, matriz2 [2][2] = {{4,5},{6,7}}, matrizsoma[2][2];
 
-char * nomesAlunos [3][3] = {
-    {"Aluno 0", "Pt: 30", "Mat: 90"},
-    {"Aluno 1", "Pt: 60", "Mat: 60"},
-    {"Aluno 2", "Pt: 90", "Mat: 30"}
-};
-
-printf("Digite o número do aluno que quer ver as notas: \n");
-printf("Para o aluno 0, digite 0 \n");
-printf("Para o aluno 1, digite 1 \n");
-printf("Para o aluno 2, digite 2 \n");
-scanf("%d", &index);
-
-printf("As notas do %s são: %s , %s \n", nomesAlunos[index][0], nomesAlunos[index][1], nomesAlunos[index][2]);
+    for (int i = 0; i < 2; i ++){
+        for (int j = 0; j < 2; j ++){
+            matrizsoma[i][j] = matriz1[i][j] + matriz2[i][j];
+            printf("matrizsoma[%d][%d] = %d\n", i, j, matrizsoma[i][j]);
+        }
+        printf("\n");
+    }
 
     return 0;
 }
