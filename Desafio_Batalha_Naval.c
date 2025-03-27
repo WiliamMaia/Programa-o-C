@@ -20,7 +20,7 @@ void navio_horizontal (int tabuleiro[tamanho][tamanho], int linha, int coluna) {
     if(coluna + 2 < tamanho) {  // Aqui aplico uma condição para não acontecer de posicionar um navio em um local onde ultrapasse os limites do tabuleiro
         for (int x = 0; x < 3; x ++) {  //  Aqui inicio a condição para não sobrepor outro navio
             if (tabuleiro[linha][coluna + x] == 3){
-                printf("O navio da horixontal não pode ser posicionado aqui por jar estar ocupado por um outro !\n");
+                printf("O navio da horixontal não pode ser posicionado em (%d, %d) por ja estar ocupado por um outro !\n", linha, coluna);
             }
         }
     for (int x = 0; x < 3; x ++) {  //  Aqui declaro um loop para aplicar o navio que ocupa 3 posições na horizontal (x)
@@ -34,7 +34,7 @@ void navio_vertical (int tabuleiro[tamanho][tamanho], int linha, int coluna) {  
     if (linha + 2 < tamanho) {  // Aqui aplico uma condição para não acontecer de posicionar um navio em um local onde ultrapasse os limites do tabuleiro
         for (int y = 0; y < 3; y ++) {  //  Aqui inicio a condição para não sobrepor outro navio
             if (tabuleiro[linha + y][coluna] == 3){
-                printf("O navio da vertical não pode ser posicionado aqui por jar estar ocupado por um outro !\n");
+                printf("O navio da vertical não pode ser posicionado em (%d, %d) por ja estar ocupado por um outro !\n", linha, coluna);
             }
         }    
     for (int y = 0; y < 3; y ++) {  //  Aqui declaro um loop para aplicar o navio na vertical (y) que ocupará também 3 posições
@@ -48,7 +48,7 @@ void navio_diagonal1 (int tabuleiro[tamanho][tamanho], int linha, int coluna) { 
     if ((linha + 2 < tamanho) && (coluna + 2 < tamanho)) {  // Aqui aplico uma condição para não acontecer de posicionar um navio em um local onde ultrapasse os limites do tabuleiro
         for (int x = 0, y = 0; x < 3 && y < 3; x ++, y ++) {  //  Aqui inicio a condição para não sobrepor outro navio
             if (tabuleiro[linha + y][coluna + x] == 3){
-                printf("O navio da diagonal 1 não pode ser posicionado aqui por jar estar ocupado por um outro !\n");
+                printf("O navio da diagonal 1 não pode ser posicionado em (%d, %d) por ja estar ocupado por um outro !\n", linha, coluna);
             }
         }    
     for (int x = 0, y = 0; x < 3 && y < 3; x ++, y ++) {  //  Aqui declaro um loop para aplicar o navio na diagonal que ocupará também 3 posições
@@ -62,7 +62,7 @@ void navio_diagonal2 (int tabuleiro[tamanho][tamanho], int linha, int coluna) { 
     if ((linha + 2 < tamanho) && (coluna - 2 >= 0)) {  // Aqui aplico uma condição para não acontecer de posicionar um navio em um local onde ultrapasse os limites do tabuleiro
         for (int x = 0, y = 0; x < 3 && y < 3; x ++, y ++) {  //  Aqui inicio a condição para não sobrepor outro navio
             if (tabuleiro[linha + y][coluna - x] == 3){
-                printf("O navio da diagonal 2 não pode ser posicionado aqui por jar estar ocupado por um outro !\n");
+                printf("O navio da diagonal 2 não pode ser posicionado em (%d, %d) por ja estar ocupado por um outro !\n", linha, coluna);
             }
         }    
     for (int x = 0, y = 0; x < 3 && y < 3; x ++, y ++) {  //  Aqui declaro um loop para aplicar o navio na diagonal que ocupará também 3 posições
