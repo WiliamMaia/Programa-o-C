@@ -72,6 +72,28 @@ void navio_diagonal2 (int tabuleiro[tamanho][tamanho], int linha, int coluna) { 
         printf("O navio da diagonal 2 não pode ser posicionado aqui por ultrapassar o limite do tabuleiro !\n");
     }
 }
+void habilidade_cone (int tabuleiro[tamanho][tamanho], int origemi, int origemj, int linha, int coluna) {  //  Aqui começo a criar a habilidade tipo cone
+    if (tabuleiro[origemi][origemj] == 3) {  //  Aqui coloco uma condição para que se houver um 'acerto' o '3' que simboliza o navio será convertifo em '5'
+        tabuleiro[origemi][origemj] = 5;
+    } else {
+    tabuleiro[origemi][origemj] = 1;  //  Aqui estou aplicando o ponto de origem 
+    if ((linha + 2 >= tamanho) || (coluna + 2 >= tamanho) || (coluna - 2 < 0)) {  // Aqui estou colocando condições para que a habilidade não ultrpasse os limites do tabuleiro
+        printf("A sua habilidade uktrapassa os limites do tabuleiro !\n");
+    }
+
+    if (origemi + 1 < linha) {
+        tabuleiro[origemi + 1][origemj] = 1;  //  Aqui faço com que se expanda para baixo a partir do ponto de origem
+        if (origemj - 1 >= 0) tabuleiro[origemi + 1][origemj - 1] = 1;  //  Aqui faço com que a linha que desceu se expanda para esquerda negativando a coluna 'j'
+        if (origemj + 1 < coluna) tabuleiro[origemi + 1][origemj + 1] = 1;  //  Aqui faço com que a linha que desceu se expanda para a direita
+    }
+    if (origemi + 2 < linha) { 
+        tabuleiro[origemi + 2][origemj] = 1;   //  Aqui desço a segunda linha do cone
+        if (origemj - 2 >= 0) tabuleiro[origemi + 2][origemj - 2] = 1;  //  Aqui expando a segunda linha do ponto mais distante  para a esquerda negativando a coluna em - 2 para a base maior
+        if (origemj - 1 >= 0) tabuleiro[origemi + 2][origemj - 1] = 1;  //  Aqui expando a segunda linha do cone completando o espaço que sobrou desde  o último negativando a coluna em - 1 para a base maior
+        if (origemj + 1 < coluna) tabuleiro[origemi + 2][origemj + 1] = 1;  //  Aqui expando a segunda linha para a direita em + 1 para a base maior
+        if (origemj + 2 < coluna) tabuleiro[origemi + 2][origemj + 2] = 1;  //  Aqui expando a segunda linha para a direita em + 2 para a base maior
+    }
+}
 
 int main() {
 
