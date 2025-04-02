@@ -72,28 +72,27 @@ void navio_diagonal2 (int tabuleiro[tamanho][tamanho], int linha, int coluna) { 
         printf("O navio da diagonal 2 não pode ser posicionado aqui por ultrapassar o limite do tabuleiro !\n");
     }
 }
-void habilidade_cone (int tabuleiro[tamanho][tamanho], int origemi, int origemj, int linha, int coluna) {  //  Aqui começo a criar a habilidade tipo cone
-    if (tabuleiro[origemi][origemj] == 3) {  //  Aqui coloco uma condição para que se houver um 'acerto' o '3' que simboliza o navio será convertifo em '5'
-        tabuleiro[origemi][origemj] = 5;
-    } else {
-    tabuleiro[origemi][origemj] = 1;  //  Aqui estou aplicando o ponto de origem 
-    if ((linha + 2 >= tamanho) || (coluna + 2 >= tamanho) || (coluna - 2 < 0)) {  // Aqui estou colocando condições para que a habilidade não ultrpasse os limites do tabuleiro
-        printf("A sua habilidade uktrapassa os limites do tabuleiro !\n");
+void habilidade_cone(int tabuleiro[tamanho][tamanho], int origemi, int origemj) {   //  Aqui começo a declarar a recursividade da habilidade em cone
+    if ((origemi + 2 >= tamanho) || (origemj + 2 >= tamanho) || (origemj - 2 < 0)) {   //  Aqui declaro as limitações da habilidade para que não ultrapasse os limites do tabuleiro
+        printf("A habilidade cone ultrapassa os limites do tabuleiro!\n");
+        return;  //  Aplicado para impedir que seja aplicado a habilidade, senão aplicaria ainda assim.
     }
 
-    if (origemi + 1 < linha) {
-        tabuleiro[origemi + 1][origemj] = 1;  //  Aqui faço com que se expanda para baixo a partir do ponto de origem
-        if (origemj - 1 >= 0) tabuleiro[origemi + 1][origemj - 1] = 1;  //  Aqui faço com que a linha que desceu se expanda para esquerda negativando a coluna 'j'
-        if (origemj + 1 < coluna) tabuleiro[origemi + 1][origemj + 1] = 1;  //  Aqui faço com que a linha que desceu se expanda para a direita
-    }
-    if (origemi + 2 < linha) { 
-        tabuleiro[origemi + 2][origemj] = 1;   //  Aqui desço a segunda linha do cone
-        if (origemj - 2 >= 0) tabuleiro[origemi + 2][origemj - 2] = 1;  //  Aqui expando a segunda linha do ponto mais distante  para a esquerda negativando a coluna em - 2 para a base maior
-        if (origemj - 1 >= 0) tabuleiro[origemi + 2][origemj - 1] = 1;  //  Aqui expando a segunda linha do cone completando o espaço que sobrou desde  o último negativando a coluna em - 1 para a base maior
-        if (origemj + 1 < coluna) tabuleiro[origemi + 2][origemj + 1] = 1;  //  Aqui expando a segunda linha para a direita em + 1 para a base maior
-        if (origemj + 2 < coluna) tabuleiro[origemi + 2][origemj + 2] = 1;  //  Aqui expando a segunda linha para a direita em + 2 para a base maior
+    for (int i = 0; i < 3; i++) {  //  Aqui começo a desenhar o cone como no navio em vertical
+        for (int j = -i; j <= i; j++) {  // Aqui aplico a condição para expansão da horizontal nas linhas seguintes, utilizndo a expansão de '1' como limitador, assim se cresce 1, j se expande desde a origemi até sua representação positiva = -1, 0, +1 e se i = 2, -2, -1, 0, +1, +2
+            int ei = origemi + i;  //  Aqui criei a variavel'ei' para representar a expandão de i
+            int ej = origemj + j;  //  Aqui criei a variavel'ej' para representar a expandão de j
+            if (ei < tamanho && ej >= 0 && ej < tamanho) {  //  Aqui declaro as limitações da habilidade para que não ultrapasse os limites do tabuleiro
+                if (tabuleiro[ei][ej] == 3) {   //   Aqui aplico uma condição para toda vez que a habilidade encontrar uma parte do navio o substitua de '3' para '5' simbolizando um acerto
+                    tabuleiro[ei][ej] = 5;
+                } else {
+                    tabuleiro[ei][ej] = 1;  // Aqui se não encontrar uma parte do navio sera aplicado '1' para desenhar a habilidade
+                }
+            }
+        }
     }
 }
+
 
 int main() {
 
@@ -103,6 +102,7 @@ int main() {
     navio_vertical(tabuleiro, 6, 6);    //  Aqui chamo a recursividade do navio na vertical, coloquei como posição inicial 'G6' no tabuleiro e ocupou 'G6, G7 e G8'
     navio_diagonal1(tabuleiro, 1, 7);    //  Aqui chamo a recursividade do navio na diagonal, coloquei como posição inicial 'H1' no tabuleiro e ocupou 'H1, I2 e J3'
     navio_diagonal2(tabuleiro, 4, 3);    //  Aqui chamo a recursividade do navio na diagonal, coloquei como posição inicial 'D4' no tabuleiro e ocupou 'D4, C5 e B6'
+    habilidade_cone(tabuleiro, 7, 2);   //  Aqui chamo a recursividade da habilidade em cone, coloquei como origem a posição 'C7' no tabuleiro e sw expandiu para baixo desenhando o cone, escolhi essa posição para o desenho complero sem 'acerto'
     exibicao_tabuleiro(tabuleiro);   //  Aqui chamo a recursividade da exibição do tabuleiro
 
     
@@ -110,12 +110,6 @@ int main() {
     // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
     // Sugestão: Utilize estruturas de repetição aninhadas para preencher as áreas afetadas por essas habilidades no tabuleiro.
     // Sugestão: Exiba o tabuleiro com as áreas afetadas, utilizando 0 para áreas não afetadas e 1 para áreas atingidas.
-
-    // Exemplos de exibição das habilidades:
-    // Exemplo para habilidade em cone:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 1 1 1 1 1
     
     // Exemplo para habilidade em octaedro:
     // 0 0 1 0 0
